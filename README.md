@@ -51,7 +51,7 @@ There is no PCB yet, as this is still on breadboard at the moment.
 
 This module is based on a Teensy 4.1. A Teensy may be oversized for such a project, but I had one lying around and wanted to get to know the Teensy.
 
-The experience was great, the documentation too. I never regreted this choice. I particularly enjoyed details such as being able to rename the MIDI device easily.
+The experience was great, the documentation too. I never regretted this choice. I particularly enjoyed details such as being able to rename the MIDI device easily.
 
 ### Output stage
 
