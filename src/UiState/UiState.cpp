@@ -58,18 +58,36 @@ void UiState::turn(int direction, GlobalState& state) {
       currentOutputModifierIndex = Utils::cycleIndex(currentOutputModifierIndex, direction, Modifiers::COUNT);
 
     } else if (currentMode == Mode::OUTPUT_PARAMETER) {
-      if (direction > 0 && currentParameterValue < 100) {
-        currentParameterValue++;
-      } else if (direction < 0 && currentParameterValue > 0) {
-        currentParameterValue--;
+      Parameters::Definition paramDef = Parameters::ALL_PARAMETERS[currentParameterIndex];
+      switch (paramDef.valueType) {
+        case Parameters::ValueType::PERCENT:
+          if (direction > 0 && currentParameterValue < 100) {
+            currentParameterValue++;
+          } else if (direction < 0 && currentParameterValue > 0) {
+            currentParameterValue--;
+          }
+          break;
+        case Parameters::ValueType::INDEX:
+          currentParameterValue = Utils::cycleIndex(currentParameterValue, direction, paramDef.maxIndex + 1);
+          break;
       }
     }
 
   } else {
     if (currentMode == Mode::OUTPUT_PARAMETER) {
       currentParameterIndex = Utils::cycleIndex(currentParameterIndex, direction, Parameters::COUNT);
-      currentParameterValue = Utils::floatToPercent(
-        state.getOutputReadOnly(currentOutputIndex).getParameterValue(Parameters::ALL_PARAMETERS[currentParameterIndex].type));
+      Parameters::Definition paramDef = Parameters::ALL_PARAMETERS[currentParameterIndex];
+      OutputState output = state.getOutputReadOnly(currentOutputIndex);
+      switch (paramDef.valueType) {
+        case Parameters::ValueType::PERCENT:
+          currentParameterValue = Utils::floatToPercent(output.getParameterValue(paramDef.type));
+          break;
+        case Parameters::ValueType::INDEX:
+          currentParameterValue = output.getIntParameterValue(paramDef.type);
+          break;
+      }
+
+
     } else {
       modeCycleIndex = Utils::cycleIndex(modeCycleIndex, direction, outputCount + 1);
 
@@ -88,13 +106,24 @@ void UiState::turn(int direction, GlobalState& state) {
 void UiState::click(GlobalState& state) {
   if (editing) {
     editing = false;
+    
     if (currentMode == Mode::BPM) {
       state.setBpm(bpm);
     } else if (currentMode == Mode::OUTPUT_MODIFIER) {
-      state.getOutput(currentOutputIndex).setModifier(currentOutputModifierIndex);
-    } else if (currentMode==Mode::OUTPUT_PARAMETER){
+      OutputState& output = state.getOutput(currentOutputIndex);
+      output.setModifier(currentOutputModifierIndex);
+    } else if (currentMode == Mode::OUTPUT_PARAMETER) {
+      OutputState& output = state.getOutput(currentOutputIndex);
       Parameters::Definition paramDef = Parameters::ALL_PARAMETERS[currentParameterIndex];
-      state.getOutput(currentOutputIndex).setParameterValue(paramDef.type, Utils::percentToFloat(currentParameterValue));
+      switch(paramDef.valueType){
+        case Parameters::ValueType::PERCENT:
+          output.setParameterValue(paramDef.type, Utils::percentToFloat(currentParameterValue));
+          break;
+        case Parameters::ValueType::INDEX:
+          output.setIntParameterValue(paramDef.type, currentParameterValue);
+          break;
+      }
+      
     }
 
   } else {

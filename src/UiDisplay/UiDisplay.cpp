@@ -1,3 +1,4 @@
+#include "Bitmaps.h"
 #include <sys/_intsup.h>
 #include "./UiDisplay.h"
 
@@ -109,6 +110,7 @@ void UiDisplay::renderOutputParameter(const GlobalState& state, const UiState& u
   display.setTextColor(WHITE);
 
   Parameters::Definition paramDef = Parameters::ALL_PARAMETERS[uiState.getCurrentParameterIndex()];
+  OutputState output = state.getOutputReadOnly(uiState.getCurrentOutputIndex());
 
   // output label & value
   display.setTextSize(1);
@@ -125,29 +127,58 @@ void UiDisplay::renderOutputParameter(const GlobalState& state, const UiState& u
 
   // param value label
   display.setTextSize(1);
-  display.setCursor(98, topTextY);
-  display.write("%");
+  switch (paramDef.valueType) {
+    case Parameters::ValueType::PERCENT:
+      display.setCursor(98, topTextY);
+      display.write("%");
+      break;
+    case Parameters::ValueType::INDEX:
+      //@TODO center text
+      display.setCursor(77, topTextY);
+      const char* text = output.getParameterValueDisplayName(paramDef.type, output.getIntParameterValue(paramDef.type));
+      if(uiState.isEditing()){
+        text = output.getParameterValueDisplayName(paramDef.type, uiState.getCurrentParameterValue());
+      }
+      display.write(text);
+      break;
+  }
+
 
   // param value
-  OutputState output = state.getOutputReadOnly(uiState.getCurrentOutputIndex());
-  unsigned int value = Utils::floatToPercent(output.getParameterValue(paramDef.type));
-  if (uiState.isEditing()) {
-    display.setTextColor(BLACK);
-    value = uiState.getCurrentParameterValue();
-    if (value < 100) {
-      display.fillRect(79, bottomTextY - 4, 42, 29, WHITE);
-    } else {
-      display.fillRect(76, bottomTextY - 4, 50, 29, WHITE);
-    }
-  }
-  display.setTextSize(3);
-  if (value < 100) {
-    display.setCursor(83, bottomTextY);
-  } else {
-    display.setCursor(74, bottomTextY);
+  switch (paramDef.valueType) {
+    case Parameters::ValueType::PERCENT:
+      {
+        unsigned int value = Utils::floatToPercent(output.getParameterValue(paramDef.type));
+        if (uiState.isEditing()) {
+          display.setTextColor(BLACK);
+          value = uiState.getCurrentParameterValue();
+          if (value < 100) {
+            display.fillRect(79, bottomTextY - 4, 42, 29, WHITE);
+          } else {
+            display.fillRect(76, bottomTextY - 4, 50, 29, WHITE);
+          }
+        }
+        display.setTextSize(3);
+        if (value < 100) {
+          display.setCursor(83, bottomTextY);
+        } else {
+          display.setCursor(74, bottomTextY);
+        }
+        display.print(value);
+        break;
+      }
+
+    case Parameters::ValueType::INDEX:
+      size_t index = output.getIntParameterValue(paramDef.type);
+      const unsigned char* bmp = waveBitmaps[index];
+      if (uiState.isEditing()) {
+        index = uiState.getCurrentParameterValue();
+        bmp = waveInvBitmaps[index];
+      }
+      display.drawBitmap(80, 28, bmp, 41, 25, 1);
+      break;
   }
 
-  display.print(value);
 
 
   display.display();

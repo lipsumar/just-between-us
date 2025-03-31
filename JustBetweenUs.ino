@@ -7,14 +7,26 @@
 #include "./src/UiDisplay/UiDisplay.h"
 #include "./src/UiState/UiState.h"
 #include "./src/Waveform/Square.h"
+#include "./src/Waveform/Triangle.h"
+#include "./src/Waveform/Sine.h"
 
 // pins
 #define PIN_BTN 7
 #define PIN_ENCODER_A 32
 #define PIN_ENCODER_B 31
 #define PIN_ENCODER_BTN 30
+// pins - output pins
 #define PIN_OUTPUT_1 24
 #define PIN_OUTPUT_2 25
+#define NUM_OUTPUTS 2
+// this array also defines output index for the state
+const int outputPins[NUM_OUTPUTS] = { PIN_OUTPUT_1, PIN_OUTPUT_2 };
+
+// PWM config
+// see https://www.pjrc.com/teensy/td_pulse.html
+#define PWM_FREQUENCY 36621
+#define PWM_RESOLUTION 12
+#define PWM_MAX_VALUE ((1 << PWM_RESOLUTION) - 1)  // 2^12 - 1 = 4095
 
 // state stuff
 GlobalState state;
@@ -25,7 +37,7 @@ UiDisplay display;
 
 // clocks
 const unsigned int CLOCK_PPQ = 192;
-MasterClock masterClock(CLOCK_PPQ, state.getBpm(), 8);  // 8 quarter per cycle - the larger divider in modifiers
+MasterClock masterClock(CLOCK_PPQ, state.getBpm(), 8);  // 8 quarter per cycle - the largest divider in modifiers
 MidiClock midiClock(CLOCK_PPQ);
 
 // controls
@@ -39,15 +51,20 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Just Betwen Us - setup begin");
 
+  // configure pins
   pinMode(PIN_BTN, INPUT_PULLUP);
   pinMode(PIN_ENCODER_BTN, INPUT_PULLUP);
-  pinMode(PIN_OUTPUT_1, OUTPUT);
-  digitalWrite(PIN_OUTPUT_1, HIGH);
-  pinMode(PIN_OUTPUT_2, OUTPUT);
-  digitalWrite(PIN_OUTPUT_2, HIGH);
 
-  state.setOutputPin(0, PIN_OUTPUT_1);
-  state.setOutputPin(1, PIN_OUTPUT_2);
+  // configure PWM output pins & register them in state
+  analogWriteResolution(PWM_RESOLUTION);
+  for(int i=0; i<NUM_OUTPUTS; i++){
+    pinMode(outputPins[i], OUTPUT);
+    analogWriteFrequency(outputPins[i], PWM_FREQUENCY);
+    analogWrite(outputPins[i], 0);
+
+    state.setOutputPin(i, outputPins[i]);
+  }
+
 
   display.init();
 
@@ -79,12 +96,12 @@ void loop() {
       unsigned int pressTimeMs = millis() - knobButtonPressedAt;
       if (pressTimeMs < 800) {
         uiState.click(state);
-      } 
+      }
     }
   }
-  if(knobButtonDown && millis() - knobButtonPressedAt > 800){
+  if (knobButtonDown && millis() - knobButtonPressedAt > 800) {
     uiState.longClick(state);
-    knobButtonDown = false; // this isn't true but we need it to avoid longClick looping
+    knobButtonDown = false;  // this isn't true but we need it to avoid longClick looping
   }
 
   if (pushButton.update()) {
@@ -123,10 +140,21 @@ void masterClockTick(unsigned int clockTickCount) {
   for (unsigned int outputIndex = 0; outputIndex < state.getOutputSize(); outputIndex++) {
     OutputState output = state.getOutputReadOnly(outputIndex);
 
-    float value = squareWave(clockTickCount, CLOCK_PPQ, output.getPeriodInQuarters(), output.getWidth(), output.getPhase());
+    float value;
+    switch(ParamaterWave::ALL_WAVES[output.getWave()].type){
+      case ParamaterWave::Type::SQUARE:
+        value = squareWave(clockTickCount, CLOCK_PPQ, output.getPeriodInQuarters(), output.getWidth(), output.getPhase());
+        break;
+      case ParamaterWave::Type::TRIANGLE:
+        value = triangleWave(clockTickCount, CLOCK_PPQ, output.getPeriodInQuarters(), output.getWidth(), output.getPhase());
+        break;
+      case ParamaterWave::Type::SINE:
+        value = sineWave(clockTickCount, CLOCK_PPQ, output.getPeriodInQuarters(), output.getWidth(), output.getPhase());
+        break;
+    }
+
     unsigned int pin = output.getPin();
 
-    // output needs to be inversed
-    digitalWriteFast(pin, value == 1.0 ? LOW : HIGH);
+    analogWrite(pin, value * PWM_MAX_VALUE);
   }
 }

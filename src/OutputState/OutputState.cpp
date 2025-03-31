@@ -1,3 +1,4 @@
+#include <cstddef>
 #include "OutputState.h"
 
 OutputState::OutputState() {
@@ -26,6 +27,13 @@ float OutputState::getPeriodInQuarters() const {
     default:
       return 1.0;
   }
+}
+
+void OutputState::setWave(int wave) {
+  this->wave = wave;
+}
+int OutputState::getWave() const {
+  return wave;
 }
 
 // void OutputState::setLevel(float level) {
@@ -74,6 +82,27 @@ void OutputState::setParameterValue(Parameters::Type type, float value){
     case Parameters::Type::PHASE:
       phase = value;
       break;
+  }
+}
+int OutputState::getIntParameterValue(Parameters::Type type) const {
+  switch (type) {
+    case Parameters::Type::WAVE:
+      return wave;
+    default:
+      return 0;
+  }
+}
+void OutputState::setIntParameterValue(Parameters::Type type, int value){
+  switch (type) {
+    case Parameters::Type::WAVE:
+      wave = value;
+      break;
+  }
+}
+const char* OutputState::getParameterValueDisplayName(Parameters::Type type, size_t index) const {
+  switch (type) {
+    case Parameters::Type::WAVE:
+      return ParamaterWave::ALL_WAVES[index].displayName;
   }
 }
 
