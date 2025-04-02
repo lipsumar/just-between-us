@@ -4060,16 +4060,6 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 236.22) (xy 148.59 236.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "19ea4ba4-65f1-4f04-a070-65fa7c20a15f")
-	)
-	(wire
-		(pts
 			(xy 77.47 106.68) (xy 80.01 106.68)
 		)
 		(stroke
@@ -4380,16 +4370,6 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 236.22) (xy 189.23 236.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "56f43d90-e20c-4cd0-a6c5-a84c735f1bab")
-	)
-	(wire
-		(pts
 			(xy 48.26 -31.75) (xy 48.26 -29.21)
 		)
 		(stroke
@@ -4457,16 +4437,6 @@
 			(type default)
 		)
 		(uuid "65f32fa7-8f49-4749-b53d-7134de466d9f")
-	)
-	(wire
-		(pts
-			(xy 59.69 236.22) (xy 66.04 236.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "69660102-5dc6-4136-aa7d-721a8c2b46b1")
 	)
 	(wire
 		(pts
@@ -5330,16 +5300,6 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 236.22) (xy 106.68 236.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fca20f8f-2a98-4906-921f-74dc0dbc241d")
-	)
-	(wire
-		(pts
 			(xy 209.55 39.37) (xy 213.36 39.37)
 		)
 		(stroke
@@ -5407,16 +5367,6 @@
 			(justify left bottom)
 		)
 		(uuid "5085228a-91df-4b44-a86d-069187c4a9a1")
-	)
-	(label "OUTPUT_2"
-		(at 142.24 236.22 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5703b62d-f820-49cf-921f-755fbb044dd8")
 	)
 	(label "OUTPUT_1"
 		(at 33.02 106.68 180)
@@ -5487,16 +5437,6 @@
 			(justify right bottom)
 		)
 		(uuid "cccec328-2b97-47c0-a467-c2dbdaf4e286")
-	)
-	(label "OUTPUT_1"
-		(at 59.69 236.22 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "dafe8316-25d5-4b87-b65a-ed9eb908cd66")
 	)
 	(label "ENCODER_B"
 		(at 209.55 57.15 180)
@@ -6035,72 +5975,6 @@
 			(project ""
 				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
 					(reference "J6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 111.76 241.3 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0c4f40a5-9a78-4eb3-9e0b-4bff9720415c")
-		(property "Reference" "#PWR012"
-			(at 111.76 247.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 111.76 246.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 111.76 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 111.76 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 111.76 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c4d46024-2662-456b-8875-ee20d5dfdee1")
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -7048,74 +6922,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Audio:AudioJack2_Ground")
-		(at 194.31 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1e20cbf6-bc88-4022-8212-e72e5d11bb3e")
-		(property "Reference" "J11"
-			(at 194.31 230.124 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AudioJack"
-			(at 194.31 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 194.31 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 194.31 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Audio Jack, 2 Poles (Mono / TS), Grounded Sleeve"
-			(at 194.31 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "T"
-			(uuid "90bae803-b41b-4866-879b-16bc05607e96")
-		)
-		(pin "G"
-			(uuid "af6769dc-fa4d-4681-b1d6-d78b0ba773da")
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(reference "J11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "JBU_Library:JBU_Teensy")
 		(at 224.79 35.56 0)
 		(unit 1)
@@ -7320,74 +7126,6 @@
 			(project ""
 				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Audio:AudioJack2_Ground")
-		(at 111.76 236.22 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "225526c3-abdc-42e2-b9a8-8bceabfa7ac8")
-		(property "Reference" "J10"
-			(at 111.76 230.124 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AudioJack"
-			(at 111.76 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 111.76 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 111.76 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Audio Jack, 2 Poles (Mono / TS), Grounded Sleeve"
-			(at 111.76 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "T"
-			(uuid "6283eb33-ef9e-42bb-b4b3-47fab8346866")
-		)
-		(pin "G"
-			(uuid "fddd8fc4-9847-4913-9aa0-b72511cece35")
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(reference "J10")
 					(unit 1)
 				)
 			)
@@ -9731,72 +9469,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 194.31 241.3 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "93ab1c70-1200-4d03-8293-ded88bfb6d0f")
-		(property "Reference" "#PWR020"
-			(at 194.31 247.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 194.31 246.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 194.31 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 194.31 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 194.31 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b64bb172-d927-425b-8bf8-8478cbba254f")
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 113.03 -17.78 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11430,172 +11102,6 @@
 				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
 					(reference "#PWR022")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(sheet
-		(at 148.59 229.87)
-		(size 33.02 13.97)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "9fa7cbfe-33ed-4377-8ae2-7a74f76f9a8f")
-		(property "Sheetname" "Output 2"
-			(at 148.59 229.1584 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "output.kicad_sch"
-			(at 148.59 244.4246 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "INPUT" input
-			(at 148.59 236.22 180)
-			(uuid "795b362f-e1ac-4f77-8552-d18cce0c2571")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "OUTPUT" output
-			(at 181.61 236.22 0)
-			(uuid "d329e177-74e4-4eaa-b7b6-dc5210dd35a7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(page "4")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 39.37 314.96)
-		(size 63.5 35.56)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board no)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "c4585f90-c53e-478a-a4f0-6e6cbac7fc93")
-		(property "Sheetname" "old"
-			(at 39.37 314.2484 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "old.kicad_sch"
-			(at 39.37 351.1046 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(page "4")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 66.04 228.6)
-		(size 33.02 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "d2f23557-2bd7-4b76-8a6b-49305f21f616")
-		(property "Sheetname" "Output 1"
-			(at 66.04 227.8884 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "output.kicad_sch"
-			(at 66.04 244.4246 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "INPUT" input
-			(at 66.04 236.22 180)
-			(uuid "5de64137-32f5-4478-a0e9-c5734504e959")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "OUTPUT" output
-			(at 99.06 236.22 0)
-			(uuid "148d452c-331c-4444-9e6a-68d1b2c1d3be")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "JustBetweenUs"
-				(path "/d34804cb-129a-4827-b305-f906adc33bb6"
-					(page "3")
 				)
 			)
 		)
