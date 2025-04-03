@@ -20,6 +20,7 @@ This is my second large Arduino project and still consider myself a C++ and elec
   - Set BPM
   - Set modifier for each output (x1, x2, x3, /2, /3, /4, ...)
   - Parameters for each output:
+    - Wave (square, triangle, sine) ([in progress](https://github.com/lipsumar/just-between-us/discussions/2))
     - Width (duty cycle)
     - Phase
 
@@ -55,22 +56,12 @@ The experience was great, the documentation too. I never regretted this choice. 
 
 ### Output stage
 
-One thing that is certainly poorly designed is the output stage. The output stage is the electronics between the GPIO pin and the eurorack jack.
-
-I went for a super simple solution with components i had on hand: transistors and resistors. This is however quite limiting, as I can only output LOW or HIGH.
-
-This is one of the first thing on my list to improve. Being able to output any wave will open a world of possibilities!
+I'm currently working on getting proper analog outputs: https://github.com/lipsumar/just-between-us/discussions/2
 
 ### Power
 
-#### 5v from eurorack
-
-I'm currently getting 5v straight from the eurorack 5v rail. This is probably somewhat questionable. I think the right way to go is getting 12v and use a power regulator. There is a nice section about powering eurorack modules in [this post](https://blog.thea.codes/designing-big-honking-button/).
-
-I'm also not even using decoupling caps, the reason is lazyness. Also remember: prototype stage.
-
 #### USB and external power
 
-The schematic includes 2 USB ports: the "built-in" one and an "external". The reason is that this module is powered by eurorack, so it receives 5v in its VIN pin. Because of that, we can't simply plug in a USB in the built-in USB port, the power coming from the USB should be separated. Here is an excellent page about this very topic: https://www.pjrc.com/teensy/external_power.html
+Do not plug USB with the Teensy powerd through eurorack. I'm currently using a cable with the + cable cut out. Eventually a second USB port will allow to connect safely to a USB host but without the +5v connection.
 
-For this reason, a second USB port ("external") allows to connect safely to a USB host but without the +5v connection.
+Here is an excellent page about this very topic: https://www.pjrc.com/teensy/external_power.html
